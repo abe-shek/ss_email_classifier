@@ -1,0 +1,174 @@
+.top-nav {
+    padding: 1% 0 0 0;
+    box-shadow: 1px 2px 2px lightgrey;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+.brand-controls {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    padding: 0.5% 2.5%;
+}
+
+.navbar-con {
+    align-self: flex-start;
+    padding: 0 2.5%;
+    width: 100%;
+    border-top: 1px solid lightgray;
+}
+
+.base-content {
+    margin: 1.5% 5%;
+}
+
+.modal-steps-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.modal-step {
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+    color: gray;
+}
+
+.modal-step .counter {
+    position: relative;
+}
+
+.modal-step .counter .counter-title {
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    left: 30%;
+    top: 20%;
+}
+
+.modal-step .step-title {
+    font-size: 16px;
+}
+
+.modal-step-active {
+    color: #444 !important;
+}
+
+.modal-step-pending {
+    color: lightgray !important;
+}
+
+.modal-step-pending .counter .counter-title {
+    color: lightgray !important;
+}
+
+.modal-step-divider {
+    border-top: 0;
+    padding: 2px;
+    width: 20%;
+    border-bottom: 1px solid lightgray;
+}
+
+.display_none {
+    display: none !important;
+}
+
+/*overriding bootstrap css*/
+
+.nav.nav-tabs .nav-item {
+    padding: 0 10px;
+    width: 15%;
+}
+
+.nav-tabs .nav-link {
+    color: gray;
+    text-align: center;
+    border: 0 !important;
+}
+
+.nav-tabs .nav-link:hover {
+    color: dimgray;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom: 3px solid #593196 !important;
+    font-weight: bolder;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group > .form-control,
+.form-label-group > label {
+    height: 3.125rem;
+    padding: .75rem;
+}
+
+.form-label-group > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0; /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    pointer-events: none;
+    cursor: text; /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+
+.form-label-group .form-control::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group .form-control:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group .form-control::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group .form-control::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group .form-control::placeholder {
+    color: transparent;
+}
+
+.form-label-group .form-control:not(:placeholder-shown) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group .form-control:not(:placeholder-shown) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+.upload_border {
+    border: 1px solid lightgray;
+    padding: 6px 12px;
+    display: flex;
+    flex-flow: row wrap;
+}

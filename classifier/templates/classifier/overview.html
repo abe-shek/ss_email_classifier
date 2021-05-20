@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% block content %}
+    <div>
+        <h4>Welcome to Singularity Systems Inc. Email classifier</h4>
+        <br/>
+        <p>Using this interface you can upload your email (as a text file)
+            to know which category it probably lies in, with just a few clicks!</p>
+        <p>Click on the "Upload Files" button to get started ...</p>
+
+        <button class="btn btn-primary upload-btn" type="button"
+                name="button">
+        <span class="spinner-border spinner-border-sm display_none"
+              role="status" aria-hidden="true"></span>
+            Upload Files
+        </button>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".upload-btn").click(function () {
+                let url = "{% url 'classifier:upload_files' %}";
+                $.ajax({
+                    url: url,
+                    success: function (data) {
+                        $("#base_modal").html(data);
+                        $("#base_modal").modal('show', $(".upload-btn"));
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

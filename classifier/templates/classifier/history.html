@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {% load static %}
+    <link type="text/css" href="{% static 'submission/css/submission.css' %}" rel="stylesheet">
+    <div class="results-div">
+        <div class="results_overview_div">
+            <h4>Result History</h4>
+            {% if results|length > 0 %}
+                <div class="results-table" style="margin-top: 2%">
+                    <table class="table table-striped" style="width:100%;">
+                        <thead>
+                        <tr class="table-warning">
+                            <th>Submitted Date</th>
+                            <th>Uploaded File</th>
+                            <th>Processing Status</th>
+                            <th>Classified Category</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for res in results %}
+                            <tr>
+                                <td>{{ res.created_at|date:'N j, Y, P T' }}</td>
+                                <td>{{ res.uploaded_file_name }}</td>
+                                <td>{{ res.status_str }}</td>
+                                <td>{{ res.prediction }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% if paginator and paginator.num_pages %}
+{#                    <div class="pagination-con">#}
+{#                        <ul class="pagination"></ul>#}
+{#                    </div>#}
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="empty-results-div">
+                    <span style="font-size: 48px;"><i class="fa fa-search"></i></span>
+                    <span>
+                    Sorry, we couldn't load your history of uploaded files :( <br/><br/>
+                </span>
+                    <p>
+                        This might be because there you haven't uploaded any files to classify, yet.
+                        <br/>
+                        You can start by visiting the Dashboard and clicking "Upload Files" button
+                        to upload your emails as text files.
+                        <a class="btn btn-primary"
+                           href="{% url 'classifier:overview' %}">Dashboard
+                        </a>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            // setup_pagination(parseInt("{{ paginator.num_pages|default:0 }}"), parseInt("{{ paginated_by|default:0 }}"));
+        });
+    </script>
+{% endblock %}

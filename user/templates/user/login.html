@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% block content %}
+    <div class="login-div"
+         style="display: flex; flex-direction: row; justify-content: center; padding: 2.5% 2.5% 1% 2.5%">
+        <div style="width:40%; padding: 5%;">
+            <form action="{% url 'user:login_user' %}" method="post" class="form-signin">
+                {% csrf_token %}
+                <div class="text-center mb-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Hello again...</h1>
+                    <h4 class="h5 mb-3 font-weight-light">to continue, login with your</h4>
+                </div>
+                {% for field in form %}
+                    <div class="form-label-group">
+                        {{ field }}
+                        <label for={{ field.id_for_label }}>{{ field.label }}</label>
+                    </div>
+                {% endfor %}
+                {% if login_error %}
+                    <p class="errorlist" style="color: red">Invalid credentials</p>
+                {% endif %}
+                <button type="submit" class="btn btn-lg btn-primary btn-block">
+                    <span class="spinner-border spinner-border-sm display_none" role="status"
+                          aria-hidden="true"></span>
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="register-popup-div" style="font-size: 16px;display: flex;flex-direction: row;justify-content: center;padding: 1% 2.5% 2.5% 2.5%">
+        <span>Don't have an account, yet?</span>
+        <a href="{% url 'user:register_user' %}">Sign Up!</a>
+    </div>
+{% endblock %}

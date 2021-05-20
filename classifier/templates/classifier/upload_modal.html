@@ -1,0 +1,62 @@
+{% extends 'base/base_modal.html' %}
+{% block modal_content %}
+    <form id="upload_form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="{{ user.username }}" name="username">
+
+        <div class="modal-body">
+            <p class="mb-3">Upload your email(s) as text file(s) to classify them to a particular
+                category. </p>
+            {% for field in form %}
+                <div class="form-group{% if field.errors %} invalid{% endif %} upload_border">
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="help-block text-danger mt-2">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <span>
+                <u>Note</u> - Please make sure that you follow the below rules for uploading the file(s).
+            </span>
+            <ul>
+                <li><b>Text files</b> - the email classifier currently only supports parsing valid
+                    text files with '.txt' extension.
+                </li>
+                <li><b>Single or Multiple files</b> - you can choose to upload multiple files at the
+                    same time by pressing "Ctrl" (on a Windows OS) or "Command" (on a MacOS).
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+            </button>
+            <button type="submit" class="btn btn-primary modal-success-btn upload-btn">
+                <span class="spinner-border spinner-border-sm display_none" role="status"
+                      aria-hidden="true"></span>
+                Upload
+            </button>
+        </div>
+    </form>
+    <script type="text/javascript">
+        $("#upload_form").on('submit', function () {
+            let form_data = new FormData($(this).get(0));
+            $(".upload-btn").prop("disabled", true);
+            $(".upload-btn").children(".spinner-border").removeClass("display_none");
+
+            $.ajax({
+                type: $(this).attr('method'),
+                url: "{{ action_url }}",
+                enctype: $(this).attr('enctype'),
+                processData: false,
+                contentType: false,
+                data: form_data,
+                success: function (response) {
+                    $('#base_modal').html(response);
+                    $(".upload-btn").prop("disabled", false);
+                    $(".upload-btn").children(".spinner-border").addClass("display_none");
+                },
+            });
+            return false;
+        });
+    </script>
+{% endblock %}

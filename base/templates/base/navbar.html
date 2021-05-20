@@ -1,0 +1,43 @@
+{% block top_navbar %}
+    <nav class="top-nav navbar navbar-expand-md" style="background-color: white">
+        <div class="brand-controls">
+            <a class="text-dark" href="/" style="text-decoration: none;width:50%;">
+                <h3>SS Email Classifier</h3>
+            </a>
+            {% if user and "abv_name" in user %}
+                <div class="user-info-div">
+                    <h6 class="mr-3 mb-0">Welcome, {{ user.abv_name }}!</h6>
+                    <div class="dropdown settings-con">
+                    <span id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false" style="cursor: pointer; font-size: 16px;">
+                        <i class="fa fa-gear"></i></span>
+                        <div class="dropdown-menu dropdown-menu-sm-right"
+                             aria-labelledby="dropdown">
+                            <a class="dropdown-item" href="{% url 'user:change_password' %}">
+                                Change Password</a>
+                            <a class="dropdown-item" href="{% url 'user:logout_user' %}">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {% if user and "abv_name" in user %}
+            <div class="navbar-con">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link {% if "classifier" in request.get_full_path and "results" not in request.get_full_path %} active {% endif %}"
+                           href="{% url 'classifier:overview' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if "results" in request.get_full_path %} active {% endif %}"
+                           href="{% url 'classifier:get_history' %}">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if "profile" in request.get_full_path %} active {% endif %}"
+                           href="{% url 'user:load_profile' %}">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </nav>
+{% endblock %}

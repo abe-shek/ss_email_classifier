@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% block content %}
+    <h5>Your information that is saved with us</h5>
+
+    <div class="container-fluid">
+        <div class="row" style="font-size: 16px; display: flex;flex-direction: row;padding: 1%">
+            <div class="col-md-6">
+                {% for section in profile %}
+                    <div class="mb-5">
+                        <h6>{{ section.label }}</h6>
+                        <p>{{ section.value }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

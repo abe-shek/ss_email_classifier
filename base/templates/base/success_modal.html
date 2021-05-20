@@ -1,0 +1,28 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ modal_title|default:"Success" }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            {% if success_message %}
+                <span>{{ success_message|safe }}</span>
+            {% else %}
+                <span>The instructions executed successfully</span>
+            {% endif %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <span>{{ msg.title }}</span>
+                    <span>{{ msg.message }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary modal-success-btn" data-dismiss="modal">
+                Okay
+            </button>
+        </div>
+    </div>
+</div>
